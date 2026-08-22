@@ -22,14 +22,13 @@ not_empty "$git_url" "git url"
 not_empty "$run_script" "run script"
 not_empty "$git_branch" "git branch"
 
-
-
-# need to move to the project directory
+mkdir -p "$project_dir"
 cd "$project_dir"
+
 if [[ $(is_git_directory) == "false" ]]; then
     handle_new_directory
-    exit 0
 else
     handle_existing_directory
-    exit 0
 fi
+
+info run completed succesfully

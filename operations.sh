@@ -5,16 +5,17 @@ function handle_new_directory() {
 
 function handle_existing_directory() {
     nuke_local_git_changes
-    # get the current commit hash
     current_hash=$(local_git_hash)
     info local hash $current_hash
-    # get the latest remote hash
     remote_hash=$(remote_git_hash $git_branch)
     info remote hash $remote_hash
-    # erase local changes
-    # need to pull the git url
 
-    # need to run the script
+    if [[ "$current_hash" == "$remote_hash" ]]; then
+	info project is up to date, nothing to do
+    else
+	info project has been updated, building
+	run_provided_script
+    fi
 }
 
 function run_provided_script() {
