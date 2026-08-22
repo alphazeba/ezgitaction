@@ -13,19 +13,27 @@ function handle_existing_directory() {
     if [[ "$current_hash" == "$remote_hash" ]]; then
 	info project is up to date, nothing to do
     else
+	git pull
 	info project has been updated, building
 	run_provided_script
     fi
 }
 
 function run_provided_script() {
-    # tbh this script is pointless, i thought this would be more difficult
+    info "current working directory $(pwd)"
     $run_script
+    info "completed run script"
+}
+
+function translate_windows_stupid_format() {
+    local -r from_str=$1
+    echo ${from_str/C:\//\/c\/}
 }
 
 function is_git_directory() {
     local -r current_dir=$(pwd)
-    local -r output=$(git rev-parse --show-toplevel)
+    local -r git_dir=$(git rev-parse --show-toplevel)
+    local -r output=$(translate_windows_stupid_format $git_dir)
     if [[ "$current_dir" == "$output" ]]; then 
 	echo "true"
     else

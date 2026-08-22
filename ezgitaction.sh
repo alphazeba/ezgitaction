@@ -6,8 +6,11 @@ run_script=""
 git_branch=""
 sleep_time="300" # 5 * 60 = 5mins
 
-source ./functions.sh
-source ./operations.sh
+
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+source ${SCRIPT_DIR}/functions.sh
+source ${SCRIPT_DIR}/operations.sh
 
 while getopts "p:g:r:b:m:" flag; do
     case "$flag" in
@@ -30,9 +33,12 @@ cd "$project_dir"
 project_dir=$(pwd)
 
 function main() {
+    echo working directory $(pwd)
     if [[ $(is_git_directory) == "false" ]]; then
+	info "handling as new directory"
 	handle_new_directory
     else
+	info "handling as existing directory"
 	handle_existing_directory
     fi
 }
