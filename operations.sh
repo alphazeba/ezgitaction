@@ -34,11 +34,7 @@ function is_git_directory() {
     local -r current_dir=$(pwd)
     local -r git_dir=$(git rev-parse --show-toplevel)
     local -r output=$(translate_windows_stupid_format $git_dir)
-    if [[ "$current_dir" == "$output" ]]; then 
-	echo "true"
-    else
-	echo "false"
-    fi
+    [[ "$current_dir" == "$output" ]]
 }
 function nuke_local_git_changes() {
     info "nuking working directory at $(pwd)"

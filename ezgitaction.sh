@@ -34,7 +34,7 @@ project_dir=$(pwd)
 
 function main() {
     echo working directory $(pwd)
-    if [[ $(is_git_directory) == "false" ]]; then
+    if is_git_directory; then
 	info "handling as new directory"
 	handle_new_directory
     else
@@ -45,6 +45,7 @@ function main() {
 
 while true; do
     main
+    info "sleeping for ${sleep_time}"
     sleep "$sleep_time"
 done
 

@@ -5,8 +5,7 @@ output=$(translate_windows_stupid_format "$test_input")
 echo "$test_input -> $output"
 echo the pwd $(pwd)
 echo the git dir $(git rev-parse --show-toplevel)
-answer=$(is_git_directory)
-if [[ "$answer" == "true" ]]; then
+if is_git_directory; then
 	echo success
 else
 	echo FIAL
