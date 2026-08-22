@@ -18,3 +18,4 @@ function not_empty() {
 	info ${name}: ${arg}
     fi
 }
+
