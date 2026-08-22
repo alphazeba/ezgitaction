@@ -19,6 +19,7 @@ function handle_existing_directory() {
 }
 
 function run_provided_script() {
+    # tbh this script is pointless, i thought this would be more difficult
     $run_script
 }
 
